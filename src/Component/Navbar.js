@@ -15,10 +15,10 @@ export default function Navbar() {
         CONNECT WITH US
       </div>
       <div className="justify-content-end flex relative left-96">
-        <div className="mx-11 my-4 hidden md:block font-mono text-xl relative left-96 cursor-pointer">
+        <div className=" mx-44 my-4 hidden md:block font-mono text-xl relative left-96 cursor-pointer">
           About us
         </div>
-        <div className="mx-11 my-4 hidden md:block font-mono text-xl relative left-96 cursor-pointer">
+        <div className="  my-4 hidden md:block font-mono text-xl relative left-72  cursor-pointer">
           {" "}
           Help
         </div>
