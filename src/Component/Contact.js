@@ -63,7 +63,7 @@ export default function Contact() {
   return (
     <>
       <div className=" flex justify-center back">
-        <h2 className="text-4xl relative left-52 top-2 font-semibold font font-mono">
+        <h2 className="hidden md:block text-4xl relative left-52 top-2 font-semibold font font-mono">
           CONTACT US
         </h2>
         <div className="bg-blue-200 h-fit  w-max rounded-md my-8 md:relative left-64 top-16  ">
