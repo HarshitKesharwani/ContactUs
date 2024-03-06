@@ -1,0 +1,8 @@
+.back
+{
+    background-image: url('./phone1.jpg');
+    background-size:cover;
+   margin-top:0cm;
+    height: 20cm;
+    width: 100%;
+}
