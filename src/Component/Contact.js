@@ -92,7 +92,7 @@ export default function Contact() {
                 />
                 <p className="text-red-600 mx-10">{formErrors.Name}</p>
               </div>
-              <br />
+
               <div className="mx-8">
                 <label className="mx-10 font-bold"> Email </label>
                 <br />
@@ -106,7 +106,7 @@ export default function Contact() {
                 />
                 <p className="text-red-600 mx-10">{formErrors.Email}</p>
               </div>
-              <br />
+
               <div className="mx-8">
                 <label className="mx-10 font-bold"> Phone :</label>
                 <br />
@@ -120,7 +120,7 @@ export default function Contact() {
                 />
                 <p className="text-red-600 mx-10">{formErrors.Phone}</p>
               </div>
-              <br />
+
               <div className="mx-8">
                 <label className=" mx-10 font-bold">Message:</label>
                 <br />
@@ -140,7 +140,6 @@ export default function Contact() {
                   type="submit"
                 />
               </div>
-              <br />
             </form>
 
             <div className=" h-14 w-3/2 relative left-15 top-8 rounded-md my-8 flex space-x-5 place-content-center text-3xl  md:block">
