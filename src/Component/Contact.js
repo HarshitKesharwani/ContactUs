@@ -4,42 +4,45 @@ import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    Name: "",
-    Email: "",
-  });
+  const initialValues = { Name: "", Email: "", Phone: "", Message: " " };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
-  const [errors, setErrors] = useState({});
-  //validating forms
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormValues({ ...formValues, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+  };
 
-    // Validation logic
-    const newErrors = {};
-    if (!formData.Name.trim()) {
-      newErrors.Name = "Username is required";
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      Submit();
     }
-    if (!formData.Email.trim()) {
-      newErrors.Email = "Email is required";
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.Email)) {
-      newErrors.Email = "Invalid email format";
+  }, [formErrors]);
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.Name) {
+      errors.Name = " *Username is required!";
+    }
+    if (!values.Email) {
+      errors.Email = "*Email is required!";
+    } else if (!regex.test(values.Email)) {
+      errors.Email = "*This is not a valid email format!";
+    }
+    if (!values.Phone) {
+      errors.Phone = "*Phone number is required!";
     }
 
-    // Set errors if any
-    setErrors(newErrors);
-
-    // Proceed with form submission if there are no errors
-    if (Object.keys(newErrors).length === 0) {
-      // Form submission logic here
-      console.log("Form submitted:", formData);
-    }
+    return errors;
   };
   //Data collection using google sheet
   function Submit(e) {
@@ -75,54 +78,56 @@ export default function Contact() {
           </div>
           <h1 className="text-center text-3xl my-6 ">Get in Touch</h1>
           <div className="my-3 justify-center">
-            <form className="form space-y-2" onSubmit={(e) => Submit(e)}>
-              {" "}
+            <form className="form space-y-2" onSubmit={handleSubmit}>
               <div className="mx-8">
                 <label className="mx-10 font-bold"> Name </label>
                 <br />
                 <input
-                  className="mx-10 w-56 h-8 md:w-96 h-11 placeholder:p-2"
+                  className="mx-10 w-56 h-8 md:w-96 md:h-11 placeholder:p-2"
                   placeholder="Your Name"
                   name="Name"
                   type="text"
-                  value={formData.Name}
+                  value={formValues.Name}
                   onChange={handleChange}
                 />
-                {errors.username && <span>{errors.username}</span>}
+                <p className="text-red-600 mx-10">{formErrors.Name}</p>
               </div>
               <br />
               <div className="mx-8">
                 <label className="mx-10 font-bold"> Email </label>
                 <br />
                 <input
-                  className="mx-10 w-56 h-8 md:w-96 h-11 placeholder:p-2"
+                  className="mx-10 w-56 h-8 md:w-96 md:h-11 placeholder:p-2"
                   placeholder="Your Email"
                   name="Email"
                   type="text"
-                  value={formData.Email}
+                  value={formValues.Email}
                   onChange={handleChange}
                 />
-                {errors.email && <span>{errors.email}</span>}
+                <p className="text-red-600 mx-10">{formErrors.Email}</p>
               </div>
               <br />
               <div className="mx-8">
                 <label className="mx-10 font-bold"> Phone :</label>
                 <br />
                 <input
-                  className="mx-10 w-56 h-8 md:w-96 h-11 placeholder:p-2"
+                  className="mx-10 w-56 h-8 md:w-96 md:h-11 placeholder:p-2"
                   placeholder="Your Phone"
                   name="Phone"
                   type="text"
+                  value={formValues.Phone}
+                  onChange={handleChange}
                 />
+                <p className="text-red-600 mx-10">{formErrors.Phone}</p>
               </div>
               <br />
               <div className="mx-8">
                 <label className=" mx-10 font-bold">Message:</label>
                 <br />
                 <textarea
-                  className="mx-10 w-56 h-8 md:w-96 h-11 placeholder:p-2"
+                  className="mx-10 w-56 h-8 md:w-96 md:h-11 placeholder:p-2"
                   placeholder="Your Message"
-                  id="message"
+                  id="Message"
                   rows="4"
                   columns="10"
                   name="Message"
@@ -137,6 +142,7 @@ export default function Contact() {
               </div>
               <br />
             </form>
+
             <div className=" h-14 w-3/2 relative left-15 top-8 rounded-md my-8 flex space-x-5 place-content-center text-3xl  md:block">
               <div className="flex space-x-8 my-1 mx-0 md:relative left-32">
                 <a href="#">

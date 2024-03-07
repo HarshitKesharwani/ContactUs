@@ -9,7 +9,7 @@ export default function Navbar() {
         <div className="bg-black w-6 h-0.5 my-1"></div>
       </div>
       <div>
-        <FaPhoneVolume className="text-2xl mx-1 my-3 md:mx-3 md:text-4xl" />
+        <FaPhoneVolume className="text-2xl mx-1 my-3 md:mx-3 md:text-4xl " />
       </div>
       <div className="my-3 justify-center text-2xl md: font-mono md:text-3xl">
         CONNECT WITH US
